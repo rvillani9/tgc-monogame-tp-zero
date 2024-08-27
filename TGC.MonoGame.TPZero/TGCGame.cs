@@ -120,7 +120,6 @@ namespace TGC.MonoGame.TP
             City.Draw(gameTime, FollowCamera.View, FollowCamera.Projection);
 
             // El dibujo del auto debe ir aca.c
-            CarModel.Draw(gameTime , FollowCamera.View, FollowCamera.Projection);
 
             base.Draw(gameTime);
         }
