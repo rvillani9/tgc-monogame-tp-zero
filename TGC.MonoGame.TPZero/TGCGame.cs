@@ -25,6 +25,10 @@ namespace TGC.MonoGame.TP
         private Matrix CarWorld { get; set; }
         private FollowCamera FollowCamera { get; set; }
 
+        private SpriteBatch _spritebach ;
+
+        private Texture2D _texture;
+        private Vector2 _position;
 
         /// <summary>
         ///     Constructor del juego.
@@ -77,10 +81,10 @@ namespace TGC.MonoGame.TP
             // Creo la escena de la ciudad.
             City = new CityScene(Content);
 
-            //CarModel = Content.Load
-
             // La carga de contenido debe ser realizada aca.
-
+            _spritebach = new SpriteBatch(GraphicsDevice);
+            _texture = Content.Load<Texture2D>("car-up");
+            _position = new Vector2(0,0);
             base.LoadContent();
         }
 
@@ -99,7 +103,18 @@ namespace TGC.MonoGame.TP
             }
 
             // La logica debe ir aca.
-
+            if(keyboardState.IsKeyDown(Keys.W)){
+                _position.Y -= 10;
+            }
+            if(keyboardState.IsKeyDown(Keys.S)){
+                _position.Y += 10;
+            }
+            if(keyboardState.IsKeyDown(Keys.A)){
+                _position.X -= 10;
+            }
+            if(keyboardState.IsKeyDown(Keys.D)){
+                _position.X += 10;
+            }
             // Actualizo la camara, enviandole la matriz de mundo del auto.
             FollowCamera.Update(gameTime, CarWorld);
 
@@ -120,7 +135,9 @@ namespace TGC.MonoGame.TP
             City.Draw(gameTime, FollowCamera.View, FollowCamera.Projection);
 
             // El dibujo del auto debe ir aca.c
-            CarModel.Draw(gameTime , FollowCamera.View, FollowCamera.Projection);
+            _spritebach.Begin();
+            _spritebach.Draw(_texture , _position , Color.White);
+            _spritebach.End();
 
             base.Draw(gameTime);
         }
