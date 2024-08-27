@@ -77,6 +77,7 @@ namespace TGC.MonoGame.TP
             // Creo la escena de la ciudad.
             City = new CityScene(Content);
 
+
             // La carga de contenido debe ser realizada aca.
 
             base.LoadContent();
